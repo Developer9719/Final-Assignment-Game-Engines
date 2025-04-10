@@ -4,36 +4,38 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    public float movementSpeed = 5f;
-    public float runSpeed = 1.5f;
+    // Rotation frozen on all axis in inspector of rigidbody element to prevent character from falling over
 
-    public bool isCharacterRunning = false;
-    public bool isOnGround = true;
-
-    private Rigidbody rb;
+    // Variables
+    public float movementSpeed = 10f;
+    public Rigidbody rb; // For physics interactions
+    public Vector3 movement;
+    // User Inputs
+    public float hAxis;
+    public float vAxis;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); // Gets the rigidbody component
     }
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
+        hAxis = Input.GetAxis("Horizontal"); // Stores A/D input
+        vAxis = Input.GetAxis("Vertical"); // Stores W/S input
 
-        movePlayer(h);
-        playerJump();
+        movement = new Vector3(hAxis, 0, vAxis); // Creates a vector for 3d motion with the horizontal motion and vertical motion, the 0 means theres no jumping motion
     }
 
-    void movePlayer(float hSpeed)
+    void FixedUpdate() // Sets a force to a rigidbody element in each frame
     {
-
+        move(movement);
     }
 
-    void playerJump()
+    void move(Vector3 direction)
     {
-
+        rb.velocity = direction * movementSpeed; // Sets the velocity (speed and direction) of a rigidbody element
     }
 }
