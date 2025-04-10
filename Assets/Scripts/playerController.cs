@@ -7,7 +7,7 @@ public class playerController : MonoBehaviour
     // Rotation frozen on all axis in inspector of rigidbody element to prevent character from falling over
 
     // Variables
-    public float movementSpeed = 10f;
+    public float movementSpeed = 0.2f;
     public Rigidbody rb; // For physics interactions
     public Vector3 movement;
     // User Inputs
@@ -17,7 +17,7 @@ public class playerController : MonoBehaviour
     public LayerMask Ground;
     public float raycastDistance = 0.6f; // Scale of character is 1 so from the middle to the bottom is 0.5, 0.6 will detect anything just below the character
     private bool isOnGround;
-    public float jump = 100f;
+    public float jump = 5f;
 
 
     // Start is called before the first frame update
@@ -53,7 +53,6 @@ public class playerController : MonoBehaviour
     void FixedUpdate() // Sets a force to a rigidbody element in each frame
     {
         move(movement);
-        Debug.Log("Project Gravity: " + Physics.gravity);
     }
 
     void move(Vector3 direction)
